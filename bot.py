@@ -10,7 +10,7 @@ import time
 
 
 PATH_TO_DRIVER = "./chromedriver"
-PATH_TO_PAGE  = "https://web.whatsapp.com/"
+PATH_TO_PAGE = "https://web.whatsapp.com/"
 
 
 def send_message(browser, message):
@@ -44,10 +44,10 @@ def read_json_file():
     """
     with open('information.json') as json_file:
         data = json.load(json_file)
-        
+
         response_text = data['response_text']
         contact = data['contact']
-    
+
     return response_text, contact
 
 
@@ -61,7 +61,7 @@ def find_contact(browser, contact):
     Returns:
         {bool}: True if the contact exits.
     """
-   # click to the new chat button.
+    # click to the new chat button.
     new_chat_button = browser.find_elements_by_class_name("PVMjB")[1]
     new_chat_button.click()
     time.sleep(1)
@@ -70,18 +70,19 @@ def find_contact(browser, contact):
     inp_xpath = '//div[@class="_3FRCZ copyable-text selectable-text"][@contenteditable="true"][@data-tab="3"]'
     input_box = browser.find_element_by_xpath(inp_xpath)
     time.sleep(1)
-    
+
     input_box.send_keys(contact)
     time.sleep(1)
     contact_button = browser.find_element_by_class_name("_2kHpK")
     try:
         contact_button.click()
-    except:
+    except NoSuchElementException:
         print("No contact found. Check the information file again. Process is killing.")
         return False
     print("Contact is selected.")
 
     return True
+
 
 def main():
 
@@ -95,7 +96,7 @@ def main():
 
     # wait until the QR code is scanned.
     if input("Please read the QR Code and then press any button."):
-    	print("{}\nWe are in.".format("-"*50))
+        print("{}\nWe are in.".format("-" * 50))
     time.sleep(2)
 
     if not find_contact(browser=browser, contact=contact):
@@ -107,5 +108,6 @@ def main():
 
     # after all close the browser.
     browser.close()
+
 
 if __name__ == '__main__': main()
