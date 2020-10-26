@@ -1,6 +1,6 @@
 #!/usr/bin/env python3.6
 # -*- coding: utf-8 -*-
-# Author: Mustafa Durmuş [mustafa@hummingdrone.co]
+# Author: Mustafa Durmuş [mustafa-durmuss@outlook.com]
 
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
